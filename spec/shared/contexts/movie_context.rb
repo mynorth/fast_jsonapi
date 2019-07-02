@@ -213,6 +213,12 @@ RSpec.shared_context 'movie class' do
       cache_options enabled: true
     end
 
+    class CachingMovieWithCustomCacheKeySerializer < CachingMovieSerializer
+      def cache_key(record)
+        "CustomKey#{record.cache_key}"
+      end
+    end
+
     class CachingMovieWithHasManySerializer
       include FastJsonapi::ObjectSerializer
       set_type :movie

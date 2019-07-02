@@ -68,5 +68,9 @@ describe FastJsonapi::ObjectSerializer do
       expect(serializable_hash[:data][:attributes][:name]).to eq(previous_name)
       expect(serializable_hash[:data][:relationships][:actors][:data].length).to eq previous_actors.length
     end
+
+    it 'uses custom cache_key method' do
+      expect(CachingMovieWithCustomCacheKeySerializer.new(movie).cache_key(movie)).to eq("CustomKey#{movie.cache_key}")
+    end
   end
 end
